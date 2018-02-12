@@ -1,0 +1,32 @@
+[
+  {
+    "name": "dumbledore",
+    "alt": "Dumbledore",
+    "src": "dumbledore.jpg"
+  },
+  {
+    "name": "hagrid",
+    "alt": "Hagrid",
+    "src": "hagrid.jpg"
+  },
+  {
+    "name": "hermione",
+    "alt": "Hermione Granger",
+    "src": "hermione.jpg"
+  },
+  {
+    "name": "ron",
+    "alt": "Ron Weasley",
+    "src": "ron.jpg"
+  },
+  {
+    "name": "snape",
+    "alt": "Professor Snape",
+    "src": "snape.jpg"
+  },
+  {
+    "name": "voldemort",
+    "alt": "Lord Voldemort",
+    "src": "voldemort.jpg"
+  }
+]
