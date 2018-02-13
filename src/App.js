@@ -4,20 +4,30 @@ import ImgThumbnail from './components/Thumbnail';
 import images from './images.json';
 
 export default class App extends Component {
+  constructor() {
+    super();
+    this.state = { images };
+  }
+  handleImgThumbnailClick(imgName) {
+    console.log(`${imgName} clicked`);
+  }
   render() {
-    const imgThumbnails = images.map(image => (
+    const imgThumbnails = this.state.images.map(image => (
       <ImgThumbnail
-        alt={image.alt}
-        src={`images/${image.src}`} />));
+        key={image.name}
+        image={image}
+        onClick={this.handleImgThumbnailClick}
+      />));
+
     return (
       <Container>
         <Row>
-          <Column size='xs-12'>
-            <h1>Hello World</h1>
+          <Column size="xs-12">
+            <h1>Magic Memory</h1>
           </Column>
         </Row>
         <Row>
-          <Column size='xs-12'>
+          <Column size="xs-12">
             {imgThumbnails}
           </Column>
         </Row>
