@@ -50,5 +50,5 @@ application bootstrapped with Create React App.
 This project was bootstrapped with
 [Create React App](https://facebook.github.io/create-react-app/).
 
-[Bootstrap 3](https://getbootstrap.com/docs/3.3/) is used for layout and
+[Bootstrap](https://getbootstrap.com) is used for layout and
 styling.

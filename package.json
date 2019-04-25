@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://median-man.github.io/react-memory-game",
   "dependencies": {
+    "bootstrap": "^4.3.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts": "3.0.0"
