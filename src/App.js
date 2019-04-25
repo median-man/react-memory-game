@@ -27,7 +27,7 @@ export default class App extends Component {
 
   resetGame() {
     const resetImages = this.state.images;
-    resetImages.forEach(image => image.isClicked);
+    resetImages.forEach(image => (image.isClicked = false));
     this.setState({ images: resetImages, score: 0 });
   }
 
