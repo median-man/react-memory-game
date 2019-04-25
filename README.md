@@ -8,7 +8,9 @@ twice.
 
 ## Using the App
 
-First, clone this repo and install dependencies.
+Visit the live demo at
+[https://median-man.github.io/react-memory-game/](https://median-man.github.io/react-memory-game/).
+OR, clone this repo and install dependencies.
 (`git clone git@github.com:median-man/react-memory-game.git && cd react-memory-game && npm i`)
 
 Play the game by clicking on images. Each image click adds a point to the score.
