@@ -63,7 +63,7 @@ export default class App extends Component {
         </Row>
         <div className="pt-3">
           <Row>
-            <Column size="md-8">
+            <Column size="12" style={{maxWidth: '500px'}}>
               {imgThumbnails}
               <Toast /* show */ heading="You win!" body='Congratulations wizard!' />
             </Column>
