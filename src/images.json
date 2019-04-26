@@ -28,5 +28,25 @@
     "name": "voldemort",
     "alt": "Lord Voldemort",
     "src": "voldemort.jpg"
+  },
+  {
+    "name": "draco",
+    "alt": "Draco Malfoy",
+    "src": "draco.jpg"
+  },
+  {
+    "name": "ginny",
+    "alt": "Ginny Weasley",
+    "src": "ginny.jpg"
+  },
+  {
+    "name": "neville",
+    "alt": "Neville Longbottom",
+    "src": "neville.jpg"
+  },
+  {
+    "name": "luna",
+    "alt": "Luna Lovegood",
+    "src": "luna.jpg"
   }
 ]
