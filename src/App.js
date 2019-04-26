@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import getShuffledArray from './utils'
 import { Container, Column, Row } from './components/Grid'
 import ImgThumbnail from './components/Thumbnail'
 import images from './images.json'
-import getShuffledArray from './utils'
+import Toast from './components/Toast'
 
 export default class App extends Component {
   constructor() {
@@ -62,7 +63,10 @@ export default class App extends Component {
         </Row>
         <div className="pt-3">
           <Row>
-            <Column size="md-8">{imgThumbnails}</Column>
+            <Column size="md-8">
+              {imgThumbnails}
+              <Toast /* show */ heading="You win!" body='Congratulations wizard!' />
+            </Column>
           </Row>
         </div>
       </Container>
