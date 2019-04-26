@@ -5,11 +5,6 @@ import ImgThumbnail from './components/Thumbnail'
 import images from './images.json'
 import Toast from './components/Toast'
 
-const hiddenToast = () => ({
-  heading: '',
-  body: '',
-  show: false
-})
 
 export default class App extends Component {
   constructor() {
@@ -18,7 +13,7 @@ export default class App extends Component {
       images: getShuffledArray(images),
       score: 0,
       topScore: 0,
-      toast: hiddenToast()
+      toast: null
     }
   }
 
@@ -40,12 +35,11 @@ export default class App extends Component {
     const toast = {
       heading: 'You lost',
       body: `Final score: ${this.state.score}`,
-      show: true
     }
-    this.setState({ toast }, () => setTimeout(this.hideToast, 2000))
+    this.setState({ toast })
   }
 
-  hideToast = () => this.setState({ toast: hiddenToast() })
+  toastHidden = () => this.setState({ toast: null })
 
   resetGame() {
     const resetImages = this.state.images
@@ -84,7 +78,7 @@ export default class App extends Component {
           <Row>
             <Column size="12" style={{ maxWidth: '500px' }}>
               {imgThumbnails}
-              <Toast {...this.state.toast} />
+              {this.state.toast ? <Toast {...this.state.toast} onHide={this.toastHidden} /> : null}
             </Column>
           </Row>
         </div>
