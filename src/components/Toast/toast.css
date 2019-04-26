@@ -1,0 +1,7 @@
+.toast {
+  visibility: hidden;
+}
+
+.toast.show {
+  visibility: visible;
+}

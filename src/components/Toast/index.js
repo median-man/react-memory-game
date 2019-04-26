@@ -1,4 +1,5 @@
 import React from 'react'
+import './toast.css'
 
 const className = show => {
   let className = 'toast mt-3 mr-3'
@@ -13,7 +14,7 @@ export default function Toast({ show, heading, body }) {
       role="alert"
       aria-live="assertive"
       aria-atomic="true"
-      style={{ position: 'absolute', top: 0, right: 0 }}
+      style={{ position: 'absolute', top: 0, left: '50%', minWidth: '200px' }}
     >
       <div className="toast-header">
         <strong className="mr-auto">{heading}</strong>
