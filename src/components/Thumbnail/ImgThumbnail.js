@@ -12,6 +12,7 @@ export default (props) => {
       role="button"
       tabIndex={0}
       aria-label={image.name}
+      className="p-1 d-inline-block"
     >
       <img alt={image.alt} src={`images/${image.src}`} className={className} />
     </span>

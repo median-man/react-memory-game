@@ -1,5 +1,7 @@
-import React from 'react';
+import React from 'react'
 
-export default function Row({ children }) {
-  return <div className="row">{children}</div>;
+export default function Row({ children, className }) {
+  return (
+    <div className={className ? `row ${className}` : 'row'}>{children}</div>
+  )
 }

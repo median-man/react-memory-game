@@ -1,41 +1,43 @@
-import React, { Component } from 'react';
-import { Container, Column, Row } from './components/Grid';
-import ImgThumbnail from './components/Thumbnail';
-import images from './images.json';
-import getShuffledArray from './utils';
+import React, { Component } from 'react'
+import { Container, Column, Row } from './components/Grid'
+import ImgThumbnail from './components/Thumbnail'
+import images from './images.json'
+import getShuffledArray from './utils'
 
 export default class App extends Component {
   constructor() {
-    super();
+    super()
     this.state = {
       images: getShuffledArray(images),
       score: 0,
-      topScore: 0,
-    };
+      topScore: 0
+    }
   }
 
   handleImgThumbnailClick(imgName) {
-    const selectedImage = this.state.images.find(image => image.name === imgName);
+    const selectedImage = this.state.images.find(
+      image => image.name === imgName
+    )
     if (selectedImage.isClicked) {
-      this.resetGame();
+      this.resetGame()
     } else {
-      selectedImage.isClicked = true;
-      this.incrementScore();
+      selectedImage.isClicked = true
+      this.incrementScore()
     }
-    this.setState({ images: getShuffledArray(this.state.images) });
+    this.setState({ images: getShuffledArray(this.state.images) })
   }
 
   resetGame() {
-    const resetImages = this.state.images;
-    resetImages.forEach(image => (image.isClicked = false));
-    this.setState({ images: resetImages, score: 0 });
+    const resetImages = this.state.images
+    resetImages.forEach(image => (image.isClicked = false))
+    this.setState({ images: resetImages, score: 0 })
   }
 
   incrementScore() {
-    let { score, topScore } = this.state;
-    score += 1;
-    if (score > topScore) topScore = score;
-    this.setState({ score, topScore });
+    let { score, topScore } = this.state
+    score += 1
+    if (score > topScore) topScore = score
+    this.setState({ score, topScore })
   }
 
   render() {
@@ -44,28 +46,26 @@ export default class App extends Component {
         key={image.name}
         image={image}
         onClick={() => this.handleImgThumbnailClick(image.name)}
-      />));
+      />
+    ))
 
     return (
       <Container>
+        <h1>Magic Memory</h1>
         <Row>
-          <Column size="xs-12">
-            <h1>Magic Memory</h1>
+          <Column size="md-8">
+            <span className="pl-1 pr-2">Score: {this.state.score}</span>
+            <span className="pl-2 border-left">
+              Top Score: {this.state.topScore}
+            </span>
           </Column>
         </Row>
-        <Row>
-          <Column size="xs-12">
-            <span>Score: {this.state.score}</span>
-            &nbsp;/&nbsp;
-            <span>Top Score: {this.state.topScore}</span>
-          </Column>
-        </Row>
-        <Row>
-          <Column size="xs-12">
-            {imgThumbnails}
-          </Column>
-        </Row>
+        <div className="pt-3">
+          <Row>
+            <Column size="md-8">{imgThumbnails}</Column>
+          </Row>
+        </div>
       </Container>
-    );
+    )
   }
 }
