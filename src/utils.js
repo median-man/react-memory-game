@@ -1,5 +1,5 @@
 function getShuffledArray(arrayToShuffle) {
-  const result = arrayToShuffle;
+  const result = [...arrayToShuffle];
   let randomIndex;
   let element;
   let index;
