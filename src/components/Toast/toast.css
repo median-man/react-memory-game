@@ -1,7 +1,6 @@
 .toast {
-  visibility: hidden;
-}
-
-.toast.show {
-  visibility: visible;
+  transition: all 400ms;
+  width: 200px;
+  right: 50%;
+  position: fixed;
 }

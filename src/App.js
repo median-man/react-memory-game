@@ -5,6 +5,18 @@ import ImgThumbnail from './components/Thumbnail'
 import images from './images.json'
 import Toast from './components/Toast'
 
+// displays game lost toast
+function gameLost(state) {
+  const toast = {
+    heading: 'You lost',
+    body: `Final score: ${this.state.score}`,
+    show: true
+  }
+  return {
+    ...state,
+    toast
+  }
+}
 
 export default class App extends Component {
   constructor() {
@@ -13,7 +25,11 @@ export default class App extends Component {
       images: getShuffledArray(images),
       score: 0,
       topScore: 0,
-      toast: null
+      toast: {
+        heading: '',
+        body: '',
+        show: false
+      }
     }
   }
 
@@ -22,8 +38,7 @@ export default class App extends Component {
       image => image.name === imgName
     )
     if (selectedImage.isClicked) {
-      this.showGameLostToast()
-      this.resetGame()
+      this.setState(gameLost, () => setTimeout(this.resetGame, 2500))
     } else {
       selectedImage.isClicked = true
       this.incrementScore()
@@ -31,20 +46,14 @@ export default class App extends Component {
     this.setState({ images: getShuffledArray(this.state.images) })
   }
 
-  showGameLostToast = async () => {
-    const toast = {
-      heading: 'You lost',
-      body: `Final score: ${this.state.score}`,
-    }
-    this.setState({ toast })
-  }
-
-  toastHidden = () => this.setState({ toast: null })
-
-  resetGame() {
+  resetGame = () => {
     const resetImages = this.state.images
     resetImages.forEach(image => (image.isClicked = false))
-    this.setState({ images: resetImages, score: 0 })
+    this.setState({
+      images: resetImages,
+      score: 0,
+      toast: { ...this.state.toast, show: false }
+    })
   }
 
   incrementScore() {
@@ -78,10 +87,10 @@ export default class App extends Component {
           <Row>
             <Column size="12" style={{ maxWidth: '500px' }}>
               {imgThumbnails}
-              {this.state.toast ? <Toast {...this.state.toast} onHide={this.toastHidden} /> : null}
             </Column>
           </Row>
         </div>
+        <Toast {...this.state.toast} />
       </Container>
     )
   }
