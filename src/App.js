@@ -4,6 +4,9 @@ import ImgThumbnail from './components/Thumbnail'
 import { GameLostToast } from './components/Toast'
 import getShuffledArray from './utils'
 
+// const GAME_WON_TOAST = 'game-won'
+const GAME_LOST_TOAST = 'game-lost'
+
 export default class App extends Component {
   game = this.props.newGame()
 
@@ -11,7 +14,7 @@ export default class App extends Component {
     images: getShuffledArray(this.game.images()),
     score: 0,
     topScore: 0,
-    showGameLostToast: false
+    toast: null
   }
 
   handleImgThumbnailClick(imgName) {
@@ -25,14 +28,14 @@ export default class App extends Component {
     })
   }
 
-  gameOver = () => {
-    if (!this.game.isGameWon()) {
-      this.gameLost()
-    }
+  gameOver = () => this.game.isGameWon() ? this.gameWon() : this.gameLost()
+
+  gameWon = () => {
+
   }
 
   gameLost = () => {
-    this.setState({ showGameLostToast: true }, () =>
+    this.setState({ toast: GAME_LOST_TOAST }, () =>
       setTimeout(this.reset, 1800)
     )
   }
@@ -41,7 +44,7 @@ export default class App extends Component {
     const score = this.game.points()
     this.game = this.props.newGame()
     this.setState(({ topScore }) => ({
-      showGameLostToast: false,
+      toast: null,
       score: 0,
       topScore: Math.max(score, topScore)
     }))
@@ -80,7 +83,7 @@ export default class App extends Component {
           </Row>
         </div>
         <GameLostToast
-          show={this.state.showGameLostToast}
+          show={this.state.toast === GAME_LOST_TOAST}
           score={this.state.score}
         />
       </Container>
