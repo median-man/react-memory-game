@@ -17,7 +17,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gh-pages": "^2.0.1"
+  },
   "browserslist": [
     ">0.2%",
     "not dead",
