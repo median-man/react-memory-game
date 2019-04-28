@@ -50,5 +50,14 @@ application bootstrapped with Create React App.
 This project was bootstrapped with
 [Create React App](https://facebook.github.io/create-react-app/).
 
-[Bootstrap](https://getbootstrap.com) is used for layout and
-styling.
+[Bootstrap](https://getbootstrap.com) is used for layout and styling.
+
+## .env
+
+Use `REACT_APP_IMAGE_SLICE_AT` to limit the number of images used in the app to
+make development easier when manually using the app.
+
+```
+# Use only one image is used for the game.
+REACT_APP_IMAGE_SLICE_AT=1
+```
