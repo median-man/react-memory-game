@@ -1,0 +1,1 @@
+{"version":3,"sources":["toast.css"],"names":[],"mappings":"AAAA,OACE,0BAAqB,CAArB,kBAAqB,CACrB,WAAY,CACZ,SAAU,CACV,cACF","file":"main.b786db19.chunk.css","sourcesContent":[".toast {\n  transition: all 400ms;\n  width: 200px;\n  right: 50%;\n  position: fixed;\n}\n"]}
