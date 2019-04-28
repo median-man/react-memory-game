@@ -3,12 +3,12 @@ import './toast.css'
 
 export default class Toast extends React.Component {
   render() {
-    const { heading, body, show } = this.props
+    const { heading, body, show, indicator } = this.props
 
     return (
       <ToastContainer show={show}>
         <div className="toast-header">
-          <Indicator />
+          {indicator}
           <strong className="mr-auto">{heading}</strong>
         </div>
         <div className="toast-body">{body}</div>
@@ -33,23 +33,5 @@ function ToastContainer({ show, children }) {
     >
       {children}
     </div>
-  )
-}
-
-function Indicator() {
-  const red = '#dc3545'
-
-  return (
-    <svg
-      className="rounded mr-2"
-      xmlns="http://www.w3.org/2000/svg"
-      preserveAspectRatio="xMidYMid slice"
-      focusable="false"
-      role="img"
-      width="15"
-      height="15"
-    >
-      <rect fill={red} width="100%" height="100%" />
-    </svg>
   )
 }
