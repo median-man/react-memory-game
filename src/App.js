@@ -5,10 +5,10 @@ import Toast from './components/Toast'
 import getShuffledArray from './utils'
 
 export default class App extends Component {
-  images = this.props.images
+  game = this.props.newGame()
 
   state = {
-    images: getShuffledArray(this.images.all),
+    images: getShuffledArray(this.game.images()),
     score: 0,
     topScore: 0,
     toast: {
@@ -19,13 +19,13 @@ export default class App extends Component {
   }
 
   handleImgThumbnailClick(imgName) {
-    if (this.images.isImageClicked(imgName)) {
+    this.game.selectImage(imgName)
+    this.setState({ score: this.game.points() })
+    if (this.game.isGameOver() && !this.game.isGameWon()) {
       this.gameLost()
     } else {
-      this.images.clickImage(imgName)
-      this.incrementScore()
+      this.shuffleImages()
     }
-    this.shuffleImages()
   }
 
   gameLost = () => {
@@ -34,31 +34,32 @@ export default class App extends Component {
       body: `Final score: ${this.state.score}`,
       show: true
     }
-    this.setState({ toast, score: 0 }, () => setTimeout(this.hideToast, 1800))
-    this.images.reset()
+    console.log(this.game.points())
+    this.setState(
+      ({ topScore }) => ({
+        toast,
+        score: 0,
+        topScore: Math.max(this.game.points(), topScore)
+      }),
+      () => {
+        this.game = this.props.newGame()
+        setTimeout(this.hideToast, 1800)
+      }
+    )
   }
 
   hideToast = () =>
     this.setState({ toast: { ...this.state.toast, show: false } })
 
   shuffleImages = () =>
-    this.setState({ images: getShuffledArray(this.images.all) })
-
-  incrementScore = () => {
-    let { score, topScore } = this.state
-    score += 1
-    this.setState({
-      score,
-      topScore: score > topScore ? score : topScore
-    })
-  }
+    this.setState({ images: getShuffledArray(this.game.images()) })
 
   render() {
     const imgThumbnails = this.state.images.map(image => (
       <ImgThumbnail
-        key={image.name}
+        key={image.name()}
         image={image}
-        onClick={() => this.handleImgThumbnailClick(image.name)}
+        onClick={() => this.handleImgThumbnailClick(image.name())}
       />
     ))
 

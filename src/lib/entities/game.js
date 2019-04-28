@@ -19,6 +19,7 @@ export default function makeGame({ images }) {
     },
     isGameOver: () => isGameOver,
     isGameWon: () => points === images.length,
-    points: () => points
+    points: () => points,
+    images: () => images
   })
 }

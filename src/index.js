@@ -4,13 +4,10 @@ import 'bootstrap/dist/css/bootstrap.css'
 import './index.css'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
-import Images from './images'
-import imagesData from './imageData.json'
-
-const images = new Images(imagesData);
+import { newGame } from './lib/use-cases'
 
 ReactDOM.render(
-  <App images={images} />,
+  <App newGame={newGame} />,
   document.getElementById('root')
 )
 registerServiceWorker()
