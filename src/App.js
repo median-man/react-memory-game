@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Container, Column, Row } from './components/Grid'
 import ImgThumbnail from './components/Thumbnail'
-import { GameLostToast } from './components/Toast'
+import { GameLostToast, GameWonToast } from './components/Toast'
 import getShuffledArray from './utils'
 
-// const GAME_WON_TOAST = 'game-won'
+const GAME_WON_TOAST = 'game-won'
 const GAME_LOST_TOAST = 'game-lost'
 
 export default class App extends Component {
@@ -21,23 +21,23 @@ export default class App extends Component {
     this.game.selectImage(imgName)
     this.setState({ score: this.game.points() }, () => {
       if (this.game.isGameOver()) {
-        this.gameOver()
+        this.gameOver(this.game.isGameWon())
       } else {
         this.shuffleImages()
       }
     })
   }
 
-  gameOver = () => this.game.isGameWon() ? this.gameWon() : this.gameLost()
-
-  gameWon = () => {
-
-  }
-
-  gameLost = () => {
-    this.setState({ toast: GAME_LOST_TOAST }, () =>
-      setTimeout(this.reset, 1800)
+  gameOver = isGameWon =>
+    this.showToast(isGameWon ? GAME_WON_TOAST : GAME_LOST_TOAST).then(
+      this.reset
     )
+
+  showToast = type => {
+    this.setState({ toast: type })
+    return new Promise(resolve => {
+      setTimeout(resolve, 1500)
+    })
   }
 
   reset = () => {
@@ -48,6 +48,7 @@ export default class App extends Component {
       score: 0,
       topScore: Math.max(score, topScore)
     }))
+    this.shuffleImages()
   }
 
   shuffleImages = () =>
@@ -86,6 +87,7 @@ export default class App extends Component {
           show={this.state.toast === GAME_LOST_TOAST}
           score={this.state.score}
         />
+        <GameWonToast show={this.state.toast === GAME_WON_TOAST} />
       </Container>
     )
   }
