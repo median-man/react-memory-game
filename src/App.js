@@ -14,10 +14,14 @@ export default class App extends Component {
     images: getShuffledArray(this.game.images()),
     score: 0,
     topScore: 0,
-    toast: null
+    toast: null,
+    isLocked: false
   }
 
   handleImgThumbnailClick(imgName) {
+    if (this.state.isLocked) {
+      return
+    }
     this.game.selectImage(imgName)
     this.setState({ score: this.game.points() }, () => {
       if (this.game.isGameOver()) {
@@ -34,7 +38,7 @@ export default class App extends Component {
     )
 
   showToast = type => {
-    this.setState({ toast: type })
+    this.setState({ toast: type, isLocked: true })
     return new Promise(resolve => {
       setTimeout(resolve, 1500)
     })
@@ -46,7 +50,8 @@ export default class App extends Component {
     this.setState(({ topScore }) => ({
       toast: null,
       score: 0,
-      topScore: Math.max(score, topScore)
+      topScore: Math.max(score, topScore),
+      isLocked: false
     }))
     this.shuffleImages()
   }
@@ -65,30 +70,38 @@ export default class App extends Component {
       />
     ))
 
+    const style = {
+      transition: 'all 600ms',
+      filter: this.state.isLocked ? 'blur(2px)' : 'none',
+      opacity: this.state.isLocked ? '0.8' : '1'
+    }
+
     return (
-      <Container>
-        <h1>Magic Memory</h1>
-        <Row>
-          <Column size="md-8">
-            <span className="pl-1 pr-2">Score: {this.state.score}</span>
-            <span className="pl-2 border-left">
-              Top Score: {this.state.topScore}
-            </span>
-          </Column>
-        </Row>
-        <div className="pt-3">
+      <div>
+        <Container style={style}>
+          <h1>Magic Memory</h1>
           <Row>
-            <Column size="12" style={{ maxWidth: '500px' }}>
-              {imgThumbnails}
+            <Column size="md-8">
+              <span className="pl-1 pr-2">Score: {this.state.score}</span>
+              <span className="pl-2 border-left">
+                Top Score: {this.state.topScore}
+              </span>
             </Column>
           </Row>
-        </div>
+          <div className="pt-3">
+            <Row>
+              <Column size="12" style={{ maxWidth: '500px' }}>
+                {imgThumbnails}
+              </Column>
+            </Row>
+          </div>
+        </Container>
         <GameLostToast
           show={this.state.toast === GAME_LOST_TOAST}
           score={this.state.score}
         />
         <GameWonToast show={this.state.toast === GAME_WON_TOAST} />
-      </Container>
+      </div>
     )
   }
 }
