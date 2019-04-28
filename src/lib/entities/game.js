@@ -7,6 +7,7 @@ export default function makeGame({ images }) {
   let points = 0
 
   const getImage = name => images.find(image => image.name() === name)
+  const isGameWon = () => points === images.length
 
   return Object.freeze({
     selectImage: name => {
@@ -16,9 +17,10 @@ export default function makeGame({ images }) {
         points += 1
       }
       image.click()
+      isGameOver = isGameWon() || isGameOver
     },
     isGameOver: () => isGameOver,
-    isGameWon: () => points === images.length,
+    isGameWon,
     points: () => points,
     images: () => images
   })
