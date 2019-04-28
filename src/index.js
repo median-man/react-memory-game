@@ -7,7 +7,7 @@ import registerServiceWorker from './registerServiceWorker'
 import Images from './images'
 import imagesData from './imageData.json'
 
-const images = Object.freeze(new Images(imagesData));
+const images = new Images(imagesData);
 
 ReactDOM.render(
   <App images={images} />,

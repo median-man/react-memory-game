@@ -1,28 +1,32 @@
+import { makeImage } from '../lib/entities'
+
 export default class Images {
   constructor(data) {
-    this.images = Object.freeze(data.map(data => new Image(data)))
+    this.images = Object.freeze(data.map(data => makeImage(data)))
   }
-  
+
   get all() {
-    return this.images
+    return this.images.map(adaptImage)
   }
 
-  getImage = name => this.images.find(image => image.name === name)
+  getImage = name => this.images.find(image => image.name() === name)
 
-  isImageClicked = name => this.getImage(name).isClicked
+  isImageClicked = name => this.getImage(name).isClicked()
 
   clickImage = name => {
-    this.getImage(name).isClicked = true
+    this.getImage(name).click()
+    // console.log(this.getImage(name))
   }
 
-  reset = () => this.images.forEach(image => (image.isClicked = false))
+  reset = () => {
+    this.images = this.images.map(adaptImage).map(makeImage)
+  }
 }
 
-class Image {
-  constructor({ name, src, alt }) {
-    this.name = name
-    this.src = src
-    this.alt = alt
-    this.isClicked = false
+function adaptImage(image) {
+  return {
+    name: image.name(),
+    src: image.src(),
+    alt: image.alt()
   }
 }
