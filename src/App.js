@@ -58,7 +58,9 @@ export default class App extends Component {
     const imgThumbnails = this.state.images.map(image => (
       <ImgThumbnail
         key={image.name()}
-        image={image}
+        label={image.name()}
+        alt={image.alt()}
+        fileName={image.src()}
         onClick={() => this.handleImgThumbnailClick(image.name())}
       />
     ))
