@@ -8,6 +8,7 @@
     "gh-pages": "^2.0.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-flip-move": "^3.0.3",
     "react-scripts": "3.0.0"
   },
   "scripts": {

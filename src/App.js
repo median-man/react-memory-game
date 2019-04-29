@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Column, Row } from './components/Grid'
-import ImgThumbnail from './components/Thumbnail'
+import { ThumbnailContainer } from './components/Thumbnail'
 import { GameLostToast, GameWonToast } from './components/Toast'
 import getShuffledArray from './utils'
 
@@ -60,15 +60,12 @@ export default class App extends Component {
     this.setState({ images: getShuffledArray(this.game.images()) })
 
   render() {
-    const imgThumbnails = this.state.images.map(image => (
-      <ImgThumbnail
-        key={image.name()}
-        label={image.name()}
-        alt={image.alt()}
-        fileName={image.src()}
-        onClick={() => this.handleImgThumbnailClick(image.name())}
-      />
-    ))
+    const images = this.state.images.map(image => ({
+      label: image.name(),
+      alt: image.alt(),
+      fileName: image.src(),
+      onClick: () => this.handleImgThumbnailClick(image.name())
+    }))
 
     const style = {
       transition: 'all 600ms',
@@ -91,7 +88,7 @@ export default class App extends Component {
           <div className="pt-3">
             <Row>
               <Column size="12" style={{ maxWidth: '500px' }}>
-                {imgThumbnails}
+                <ThumbnailContainer images={images} />
               </Column>
             </Row>
           </div>

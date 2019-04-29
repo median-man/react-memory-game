@@ -1,16 +1,16 @@
-import React from 'react';
+import React from 'react'
 
-export default (props) => {
-  const { label, alt, fileName } = props;
+export default function ImgThumbnail(props) {
+  const { label, alt, fileName, onClick } = props
   const button = React.createRef()
-  const onClick = () => {
+  const handleClick = () => {
     button.current.blur()
-    props.onClick()
+    onClick()
   }
   return (
     <span
-      onClick={onClick}
-      onKeyPress={props.onClick}
+      onClick={handleClick}
+      onKeyPress={handleClick}
       role="button"
       tabIndex={0}
       aria-label={label}
@@ -19,5 +19,5 @@ export default (props) => {
     >
       <img alt={alt} src={`images/${fileName}`} className="img-thumbnail" />
     </span>
-  );
-};
+  )
+}
