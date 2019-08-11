@@ -4,7 +4,7 @@ import ImgThumbnail from './ImgThumbnail'
 
 export default function ThumbnailContainer({ images }) {
   const imgThumbnails = images.map(image => (
-    <div key={image.label} class="d-inline-block">
+    <div key={image.label} className="d-inline-block">
       <ImgThumbnail {...image} />
     </div>
   ))
